@@ -25,4 +25,4 @@ WORKDIR /app
 RUN npm i
 
 # Run supervisor
-ENTRYPOINT ["docker-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
