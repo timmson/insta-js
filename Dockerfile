@@ -11,7 +11,7 @@ COPY ./src/ /app/
 RUN apt update && \
     apt dist-upgrade -y && \
     apt install -y apt-transport-https supervisor vim && \
-    apt autoremove && \
+#    apt autoremove && \
     apt clean && \
     mkdir -p /var/log/supervisor && \
     mdir /app && \
