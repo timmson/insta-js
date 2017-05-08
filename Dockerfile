@@ -4,27 +4,23 @@ MAINTAINER Krotov Artem <timmson666@mail.ru>
 # Install essentials
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y vim && \
+    apt-get install -y vim supervisor && \
     apt-get autoremove && \
     apt-get clean && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /app
 
-COPY docker-entrypoint /usr/local/bin/
-
 # Copy supervisord.conf
 #COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy src
-COPY src/ /app
+#COPY src/ /app
 
 # Set the WORKDIR to /app so all following commands run in /app
 #WORKDIR /app
 
 # Install dependencies
-RUN cd /app && npm i
-
-RUN chmod +x /usr/local/bin/docker-entrypoint
+#RUN cd /app && npm i
 
 # Run supervisor
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
+CMD ["/usr/bin/supervisord"]
