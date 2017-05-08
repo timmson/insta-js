@@ -11,6 +11,10 @@
   "scripts": {
     "start": "node service.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timmson/insta-js"
+  },
   "keywords": [
     "timmson",
     "instagram",

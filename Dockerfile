@@ -4,20 +4,21 @@ MAINTAINER Krotov Artem <timmson666@mail.ru>
 # Install essentials
 RUN apt update && \
     apt dist-upgrade -y && \
-    apt install -y apt-transport-https supervisor vim curl &&
-
-RUN curl -sL https://deb.nodesource.com/setup_6.x -o /tmp/node_setup.sh && \
+    apt install -y apt-transport-https vim curl &&
+    apt curl -sL https://deb.nodesource.com/setup_6.x -o /tmp/node_setup.sh && \
+    chmod +x /tmp/node_setup.sh && \
     /tmp/node_setup.sh && \
-    apt install nodejs && \
-
-RUN apt autoremove && \
+    rm -rf /tmp/node_setup.sh && \
+    apt install nodejs
+    apt autoremove && \
     apt clean && \
     mkdir -p /var/log/supervisor && \
     mkdir /app
 
+COPY docker-entrypoint /usr/local/bin/
 
 # Copy supervisord.conf
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy src
 COPY src/ /app
@@ -29,4 +30,4 @@ WORKDIR /app
 RUN npm i
 
 # Run supervisor
-CMD ["/bin/bash"]
+ENTRYPOINT ["docker-entrypoint"]
