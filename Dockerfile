@@ -9,7 +9,7 @@ RUN apt update && \
     chmod +x /tmp/node_setup.sh && \
     /tmp/node_setup.sh && \
     rm -rf /tmp/node_setup.sh && \
-    apt install nodejs
+    apt install nodejs && \
     apt autoremove && \
     apt clean && \
     mkdir -p /var/log/supervisor && \
