@@ -19,4 +19,4 @@ WORKDIR /app
 RUN npm i
 
 # Run supervisor
-CMD ["npm start"]
+CMD ["npm", "start"]
