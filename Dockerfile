@@ -1,12 +1,6 @@
 FROM node:6
 MAINTAINER Krotov Artem <timmson666@mail.ru>
 
-# Copy supervisord.conf
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Copy src
-COPY /src/* /app
-
 # Install essentials
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
@@ -18,8 +12,11 @@ RUN apt-get update && \
     cd /app && \
     npm i
 
-# Set the WORKDIR to /app so all following commands run in /app
-WORKDIR /app
+# Copy supervisord.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Copy src
+COPY src/* /app
 
 # Run supervisor
 CMD ["/usr/bin/supervisord"]
