@@ -1,14 +1,20 @@
-FROM node:6
+FROM ubuntu:xenial
 MAINTAINER Krotov Artem <timmson666@mail.ru>
 
 # Install essentials
-RUN apt-get update && \
-    apt-get dist-upgrade -y && \
-    apt-get install -y apt-transport-https supervisor vim && \
-    apt-get autoremove && \
-    apt-get clean && \
+RUN apt update && \
+    apt dist-upgrade -y && \
+    apt install -y apt-transport-https supervisor vim curl &&
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x -o /tmp/node_setup.sh && \
+    /tmp/node_setup.sh && \
+    apt install nodejs && \
+
+RUN apt autoremove && \
+    apt clean && \
     mkdir -p /var/log/supervisor && \
     mkdir /app
+
 
 # Copy supervisord.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -23,4 +29,4 @@ WORKDIR /app
 RUN npm i
 
 # Run supervisor
-CMD ["/usr/bin/supervisord"]
+CMD ["/bin/bash"]
