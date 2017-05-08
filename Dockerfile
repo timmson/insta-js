@@ -1,19 +1,14 @@
-FROM ubuntu:xenial
+FROM node:6
 MAINTAINER Krotov Artem <timmson666@mail.ru>
 
 # Install essentials
-RUN apt update && \
-    apt dist-upgrade -y && \
-    apt install -y apt-transport-https vim curl && \
-    curl -sL https://deb.nodesource.com/setup_6.x -o /tmp/node_setup.sh && \
-    chmod +x /tmp/node_setup.sh && \
-    /tmp/node_setup.sh && \
-    rm -rf /tmp/node_setup.sh && \
-    apt install nodejs && \
-    apt autoremove && \
-    apt clean && \
+RUN apt-get update && \
+    apt-get dist-upgrade -y && \
+    apt-get install -y vim && \
+    apt-get autoremove && \
+    apt-get clean && \
     mkdir -p /var/log/supervisor && \
-    mkdir /app
+    mkdir -p /app
 
 COPY docker-entrypoint /usr/local/bin/
 
