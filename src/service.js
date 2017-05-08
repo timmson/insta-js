@@ -21,14 +21,31 @@ process.on('SIGTERM', () => {
     process.exit(0);
 });
 
-//Demotion
+config.promotion.forEach(promo => {
+        log.info('Promotion[#' + promo.tag + ']: ' + promo.date);
+        new CronJob({cronTime: promo.date, onTick: () => promotion(promo.tag), start: true});
+    }
+);
+
 log.info('Demotion: ' + config.demotion.date);
-new CronJob({cronTime: config.demotion.date, onTick: demotion, start: true});
+new CronJob({cronTime: config.demotion.date, onTick: () => demotion(), start: true});
 
 
-/*function promotion() {
-    Client.Session.create(device, storage, config.user, config.password);
-}*/
+function promotion(hashTag) {
+    Client.Session.create(device, storage, config.user, config.password)
+        .then(session => {
+            return [session, new Client.Feed.TaggedMedia(session, hashTag, 2).get()];
+        })
+        .spread((session, medias) =>
+            medias.slice(0, config.limit).forEach(media => {
+                    log.info('Follow and like ' + media.account._params.username);
+                    Client.Like.create(session, media._params.id);
+                    Client.Relationship.create(session, media.account._params.id);
+                    sleep(config.delay);
+                }
+            )
+        );
+}
 
 function demotion() {
     Client.Session.create(device, storage, config.user, config.password)
