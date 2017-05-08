@@ -1,2 +1,2 @@
 # insta-js
-Useful scripts for instagram
+Useful scripts for Instagram

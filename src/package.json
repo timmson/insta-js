@@ -1,0 +1,21 @@
+{
+  "name": "insta-js",
+  "version": "0.3.1",
+  "description": "Useful scripts for Instagram",
+  "main": "service.js",
+  "dependencies": {
+    "cron": "1.2.1",
+    "instagram-private-api": "0.5.16",
+    "log4js": "1.1.1"
+  },
+  "scripts": {
+    "start": "node service.js"
+  },
+  "keywords": [
+    "timmson",
+    "instagram",
+    "node"
+  ],
+  "author": "timmson",
+  "license": "GPL-3.0"
+}

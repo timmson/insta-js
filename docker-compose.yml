@@ -1,0 +1,8 @@
+version: '2'
+services:
+   insta-js:
+     build:
+       context: .
+     image: insta-js
+     container_name: js-instagram-server
+     restart: always
