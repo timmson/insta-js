@@ -19,10 +19,12 @@ COPY docker-entrypoint /usr/local/bin/
 COPY src/ /app
 
 # Set the WORKDIR to /app so all following commands run in /app
-WORKDIR /app
+#WORKDIR /app
 
 # Install dependencies
-RUN npm i
+RUN cd /app && npm i
+
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
 # Run supervisor
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
