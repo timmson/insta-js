@@ -8,7 +8,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./src/ /app/
 
 # Install essentials
-RUN apt-getp update && \
+RUN apt-get update && \
     apt-get dist-upgrade -y && \
     apt-get install -y apt-transport-https supervisor vim && \
     apt-get autoremove && \
