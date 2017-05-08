@@ -5,7 +5,7 @@ MAINTAINER Krotov Artem <timmson666@mail.ru>
 RUN apt update && \
     apt dist-upgrade -y && \
     apt install -y apt-transport-https vim curl && \
-    apt curl -sL https://deb.nodesource.com/setup_6.x -o /tmp/node_setup.sh && \
+    curl -sL https://deb.nodesource.com/setup_6.x -o /tmp/node_setup.sh && \
     chmod +x /tmp/node_setup.sh && \
     /tmp/node_setup.sh && \
     rm -rf /tmp/node_setup.sh && \
