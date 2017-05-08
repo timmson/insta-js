@@ -7,6 +7,9 @@ RUN apt-get update && \
     apt-get install -y vim && \
     apt-get autoremove && \
     apt-get clean && \
+    rm -rf /etc/localtime && \
+    ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata && \
     mkdir -p /app
 
 # Copy src
