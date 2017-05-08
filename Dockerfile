@@ -11,16 +11,16 @@ RUN apt-get update && \
     mkdir -p /app
 
 # Copy supervisord.conf
-#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy src
-#COPY src/ /app
-
-# Set the WORKDIR to /app so all following commands run in /app
-#WORKDIR /app
+COPY src/ /app
 
 # Install dependencies
-#RUN cd /app && npm i
+RUN cd /app && npm i
+
+# Set the WORKDIR to /app so all following commands run in /app
+WORKDIR /app
 
 # Run supervisor
 CMD ["/usr/bin/supervisord"]
