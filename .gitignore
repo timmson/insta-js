@@ -1,6 +1,5 @@
 *.iml
 .idea/
 src/node_modules
-src/config.js
 src/npm-debug.log
 src/log
