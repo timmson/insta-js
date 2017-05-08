@@ -16,7 +16,7 @@ RUN apt-get update && \
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy src
-COPY src/* /app
+COPY src/ /app
 
 # Run supervisor
 CMD ["/usr/bin/supervisord"]
