@@ -8,9 +8,6 @@ const device = new Client.Device(config.device);
 const storage = new Client.CookieFileStorage('./' + config.tmpDir + '/storage.json');
 
 
-//Demotion
-new CronJob({cronTime: config.demotion.date, onTick: demotion, start: true});
-
 log.info('Service for Instagram API has started');
 log.info('Please press [CTRL + C] to stop');
 
@@ -23,6 +20,10 @@ process.on('SIGTERM', () => {
     log.info('Service for Instagram API has stopped');
     process.exit(0);
 });
+
+//Demotion
+log.info('Demotion: ' + config.demotion.date);
+new CronJob({cronTime: config.demotion.date, onTick: demotion, start: true});
 
 
 /*function promotion() {
