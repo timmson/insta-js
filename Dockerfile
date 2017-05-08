@@ -5,7 +5,7 @@ MAINTAINER Krotov Artem <timmson666@mail.ru>
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy src
-COPY ./src/ /app/
+COPY /src/* /app
 
 # Install essentials
 RUN apt-get update && \
@@ -14,7 +14,7 @@ RUN apt-get update && \
     apt-get autoremove && \
     apt-get clean && \
     mkdir -p /var/log/supervisor && \
-    mdir /app && \
+    mkdir /app && \
     cd /app && \
     npm i
 
