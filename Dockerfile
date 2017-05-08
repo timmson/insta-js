@@ -8,11 +8,11 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./src/ /app/
 
 # Install essentials
-RUN apt update && \
-    apt dist-upgrade -y && \
-    apt install -y apt-transport-https supervisor vim && \
-#    apt autoremove && \
-    apt clean && \
+RUN apt-getp update && \
+    apt-get dist-upgrade -y && \
+    apt-get install -y apt-transport-https supervisor vim && \
+    apt-get autoremove && \
+    apt-get clean && \
     mkdir -p /var/log/supervisor && \
     mdir /app && \
     cd /app && \
